@@ -16,7 +16,5 @@ public class Demo2 {
         String dates = format.format(new Date());
         System.out.println(dates);
 
-
-
     }
 }
