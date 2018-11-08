@@ -1,0 +1,76 @@
+package com.shujia.io;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * 统计每个班级的人数
+ * 1、读取班级信息表（学号，姓名，年龄，写别，班级）
+ * 2、统计每个班级学生人数
+ * 3、将结果写入到文件（班级名，人数）
+ */
+public class ClazzStudentNumber {
+    public static void main(String[] args)throws Exception {
+        //1、使用字节流读取数据
+        FileInputStream in = new FileInputStream("E:\\bigdata\\java\\data\\students.txt");
+        //2、将字节流转字符流，指定文件编码方式
+        InputStreamReader streamReader = new InputStreamReader(in,"UTF-8");
+        //3、将字符流转换成字符缓冲流，为了按行读取
+        BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+        //存放学生的集合
+        ArrayList<Student> students = new ArrayList<>();
+
+        String line ;
+        while ((line=bufferedReader.readLine())!=null){
+            String[] split = line.split(",");
+            //构建学生对象
+            Student student = new Student(split[0], split[1], Integer.parseInt(split[2]), split[3], split[4]);
+            students.add(student);
+        }
+        bufferedReader.close();
+        streamReader.close();
+        in.close();
+
+
+        /**
+         * 统计班级人数
+         *
+         */
+
+        //存放班级人数
+        HashMap<String, Integer> numberMap = new HashMap<>();
+
+        for (Student student : students) {
+            String clazz = student.getClazz();
+            //第一次进来，Integer==null,说明这个班级还没有学生
+            Integer integer = numberMap.get(clazz);
+            if (integer==null){
+                numberMap.put(clazz,1);
+            }else {
+                int i = integer + 1;
+                //覆盖之前统计的人数
+                numberMap.put(clazz,i);
+            }
+        }
+
+        //将结果保存到文件
+        FileWriter writer = new FileWriter("E:\\bigdata\\java\\out\\studentNumber.txt");
+
+        BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+        Set<Map.Entry<String, Integer>> entries = numberMap.entrySet();
+        for (Map.Entry<String, Integer> entry : entries) {
+            bufferedWriter.write(entry.getKey()+","+entry.getValue());
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+        }
+
+        bufferedWriter.close();
+        writer.close();
+
+    }
+}
