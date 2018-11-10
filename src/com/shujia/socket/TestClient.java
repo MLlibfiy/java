@@ -27,8 +27,6 @@ public class TestClient {
         String result = inputStream.readUTF();
         System.out.println("服务端响应结果：" + result);
 
-
-
         socket.shutdownInput();
 
         System.out.println("请求已完成");

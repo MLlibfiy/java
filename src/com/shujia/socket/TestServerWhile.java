@@ -16,6 +16,7 @@ public class TestServerWhile {
         //创建服务端socket对象
         ServerSocket serverSocket = new ServerSocket(8888);
         System.out.println("服务端已启动");
+        //处于等待状态，等待客服端请求
         Socket socket = serverSocket.accept();
         while (true){
 
@@ -23,8 +24,6 @@ public class TestServerWhile {
              * 接收消息
              *
              */
-            //处于等待状态，等待客服端请求
-
             InputStream in = socket.getInputStream();
             InputStreamReader reader = new InputStreamReader(in);
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -32,12 +31,10 @@ public class TestServerWhile {
             //socket.getInetAddress() 获取客户端的ip
             System.out.println(socket.getInetAddress()+"：" + line);
 
-
             /**
              * 回消息
              *
              */
-
             OutputStream out = socket.getOutputStream();
             OutputStreamWriter writer = new OutputStreamWriter(out);
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
