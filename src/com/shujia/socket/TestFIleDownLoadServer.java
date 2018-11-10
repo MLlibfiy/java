@@ -48,9 +48,13 @@ public class TestFIleDownLoadServer {
 
 
             //边读边写，详单与通过服务端，将客户端和磁盘连接在一起
-            int read = 0;
-            while ((read = bufferedInputStream.read()) != -1) {
-                bufferedOutputStream.write(read);
+
+
+            //一次输出1m 提高下载速度
+            byte[] bytes = new byte[1024 * 1024];
+            int length;
+            while ((length = bufferedInputStream.read(bytes)) != -1) {
+                bufferedOutputStream.write(bytes, 0, length);
                 bufferedOutputStream.flush();
             }
 
@@ -60,7 +64,7 @@ public class TestFIleDownLoadServer {
             socket.shutdownOutput();
             socket.shutdownInput();
 
-            System.out.println(socket.getInetAddress() + ":下载已完成" );
+            System.out.println(socket.getInetAddress() + ":下载已完成");
 
         }
     }

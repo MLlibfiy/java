@@ -46,10 +46,12 @@ public class TestFIleDownLoadClient {
          * 边读边写
          *
          */
-        int read = 0;
-        while ((read = bufferedInputStream.read()) != -1) {
-            bufferedOutputStream.write(read);
+        byte[] bytes = new byte[1024 * 1024];
+        int length;
+        while ((length = bufferedInputStream.read(bytes)) != -1) {
+            bufferedOutputStream.write(bytes,0,length);
             bufferedOutputStream.flush();
+
         }
 
         bufferedOutputStream.close();
