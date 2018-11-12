@@ -1,7 +1,7 @@
 package com.shujia.thread;
 
 public class Demo1 {
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("主线程....");
 
         //创建线程对象，对象里面包好了一堆业务逻辑，对象可以在网络里面传输
@@ -15,6 +15,7 @@ public class Demo1 {
         threadDemo1.start();
 
         for (int i = 1; i <= 10; i++) {
+
             System.out.println("第" + i + "次执行main方法");
         }
 
