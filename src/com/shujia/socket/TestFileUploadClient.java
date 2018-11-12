@@ -60,6 +60,7 @@ public class TestFileUploadClient {
         inputStream.close();
         in.close();
         socket.shutdownOutput();
+        
 
     }
 }
