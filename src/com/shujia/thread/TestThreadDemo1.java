@@ -14,6 +14,14 @@ public class TestThreadDemo1 extends Thread {
     public void run() {
 
         for (int i = 1; i <= 10; i++) {
+
+            try {
+                //使当前线程沉睡1000毫秒
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             System.out.println("第" + i + "次执行run方法");
         }
 
