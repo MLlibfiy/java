@@ -15,6 +15,9 @@ public class Demo8 {
         Consumer consumer = new Consumer(goods);
 
         new Thread(produce).start();
+        new Thread(produce).start();
+
+        new Thread(consumer).start();
         new Thread(consumer).start();
 
 
@@ -40,11 +43,11 @@ class Consumer implements Runnable{
                         e.printStackTrace();
                     }
 
-                    System.out.println("消费者消费了:"+goods.getBrand()+goods.getName());
+                    System.out.println("消费者"+Thread.currentThread().getName()+"消费了:"+goods.getBrand()+goods.getName());
                     goods.setFlag(false);//消费完了
                 }
 
-                goods.notify();//唤醒其他处于等待状态的线程
+                goods.notifyAll();//唤醒其他处于等待状态的线程
 
                 try {
                     goods.wait();//使当前线程处于等待状态，直到其他线程唤醒
@@ -91,12 +94,12 @@ class Produce implements Runnable{
                         }
                         goods.setName("小馒头");
                     }
-                    System.out.println("生产者生产了:"+goods.getBrand()+goods.getName());
+                    System.out.println("生产者"+Thread.currentThread().getName()+"生产了:"+goods.getBrand()+goods.getName());
 
                     goods.setFlag(true);
                 }
 
-                goods.notify();
+                goods.notifyAll();
                 try {
                     goods.wait();//使当前线程处于等待状态，直到其他线程唤醒
                 } catch (InterruptedException e) {
