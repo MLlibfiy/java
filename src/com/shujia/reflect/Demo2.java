@@ -36,5 +36,12 @@ public class Demo2 {
         setName.invoke(o,"王五");
         System.out.println(o);
 
+        /**
+         * java中创建对象的三种方式
+         * 1、通过new关键字创建对象
+         * 2、通过类对象获取构造函数创建对象
+         * 3、直接通过类对象创建类的对象（只能使用无参构造）
+         */
+
     }
 }
