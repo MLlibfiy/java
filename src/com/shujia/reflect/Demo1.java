@@ -10,7 +10,7 @@ public class Demo1 {
         /**
          *
          */
-        Student student = new Student();
+//        Student student = new Student();
 
         //1、获取类对象的方式
         //通过类名获取
@@ -56,7 +56,7 @@ public class Demo1 {
         //直接使用构造函数的对象创建类的对象
         //动态创建对象
         //通过反射创建对象
-              Object o = constructor.newInstance("1","张三",23,"男","一班");
+        Object o = constructor.newInstance("1","张三",23,"男","一班");
         System.out.println(o);
 
         /**

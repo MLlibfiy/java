@@ -18,10 +18,10 @@ public class Student {
                 '}';
     }
 
-    public Student() {
-    }
+   /* public Student() {
+    }*/
 
-    public String getId() {
+    private String getId() {
         return id;
     }
 
