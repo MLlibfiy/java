@@ -1,7 +1,7 @@
 package com.shujia.reflect;
 
 public class Student {
-    public String id;
+    private String id;
     private String name;
     private Integer age;
     private String gender;
@@ -18,10 +18,10 @@ public class Student {
                 '}';
     }
 
-   /* public Student() {
-    }*/
+    public Student() {
+    }
 
-    private String getId() {
+    public String getId() {
         return id;
     }
 
