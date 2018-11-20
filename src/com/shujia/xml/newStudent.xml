@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<students msg="学生信息">
+<student id="1500100005">
+    <name>宣谷芹</name>
+    <age>22</age>
+    <gender>女</gender>
+    <clazz>理科五班</clazz>
+</student>
+</students>
