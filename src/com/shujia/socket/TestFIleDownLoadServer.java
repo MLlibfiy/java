@@ -32,7 +32,7 @@ public class TestFIleDownLoadServer {
         @Override
         public void run() {
 
-            try {
+            try {//自己处理异常，
                 //获取文件列表
                 File file = new File("E:\\download");
                 File[] files = file.listFiles();
