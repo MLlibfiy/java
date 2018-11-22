@@ -1,3 +1,5 @@
+use student;
+
 create table score(
     student_id char(10),
     cource_id char(10),
