@@ -70,6 +70,25 @@ public class DBUtil {
         return con;
     }
 
+    public static void close(Connection con,Statement stat){
+        //6、回收资源
+        if (stat != null) {
+            try {
+                stat.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         Connection connection = DBUtil.getConnection();
