@@ -3,10 +3,7 @@ package com.shujia.mysql.userlogin.mvc.dao;
 import com.shujia.mysql.userlogin.mvc.bean.User;
 import com.shujia.mysql.userlogin.mvc.util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * 持久层
@@ -57,14 +54,20 @@ public class UserDao {
     public User queryByName(String username) {
         //获取数据库连接
         Connection connection = DBUtil.getConnection();
-        //拼接sql
-        String sql = "select * from user where username='" + username + "'";
-        Statement statement = null;
+
+
+        PreparedStatement preparedStatement = null;
 
         User user = null;
         try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            String sql = "select * from user where username=?";
+            //获取预编译sql执行器，防止sql注入
+            //需要的数据先用占位符表示
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1,username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 user = new User();
@@ -77,7 +80,7 @@ public class UserDao {
             e.printStackTrace();
         } finally {
             //回收资源，关闭连接
-            DBUtil.close(connection, statement);
+            DBUtil.close(connection, preparedStatement);
         }
 
         return user;
